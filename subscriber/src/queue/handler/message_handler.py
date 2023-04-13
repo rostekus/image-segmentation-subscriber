@@ -15,7 +15,7 @@ class SingletonMeta(type):
         return cls._instances[cls]
 
 
-class QuequeBroker(metaclass=SingletonMeta):
+class QueueBroker(metaclass=SingletonMeta):
     def __init__(self):
         self._queue = queue.Queue()
 
@@ -23,5 +23,5 @@ class QuequeBroker(metaclass=SingletonMeta):
         self._queue.put(message)
 
     @staticmethod
-    def processing_quque():
+    def processing_queue():
         pass
