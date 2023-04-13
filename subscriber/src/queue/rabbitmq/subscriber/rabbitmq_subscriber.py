@@ -18,13 +18,11 @@ class RabbitMQSubscriber:
         port = int(os.environ.get("RABBITMQ_PORT", 5672))
         username = os.environ.get("RABBITMQ_USERNAME")
         if username is None:
-            raise ValueError(
-                "RABBITMQ_USERNAME environment variable is not set")
+            raise ValueError("RABBITMQ_USERNAME environment variable is not set")
 
         password = os.environ.get("RABBITMQ_PASSWORD")
         if password is None:
-            raise ValueError(
-                "RABBITMQ_PASSWORD environment variable is not set")
+            raise ValueError("RABBITMQ_PASSWORD environment variable is not set")
         self._connect(host, port, username, password)
 
     def _connect(
@@ -35,8 +33,7 @@ class RabbitMQSubscriber:
         password: str = "guest",
     ) -> None:
         credentials = pika.PlainCredentials(username, password)
-        parameters = pika.ConnectionParameters(
-            host=host, port=port, credentials=credentials)
+        parameters = pika.ConnectionParameters(host=host, port=port, credentials=credentials)
         self.connection = pika.BlockingConnection(parameters)
 
         if self.connection is None:
