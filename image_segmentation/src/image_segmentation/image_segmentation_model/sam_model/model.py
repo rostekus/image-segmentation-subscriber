@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-# from segment_anything import SamAutomaticMaskGenerator, sam_model_registry
+from segment_anything import SamAutomaticMaskGenerator, sam_model_registry
 
 
 class SAMImageSegmentationModel:
@@ -15,17 +15,16 @@ class SAMImageSegmentationModel:
         crop_n_points_downscale_factor=2,
         min_mask_region_area=100,
     ) -> None:
-        # sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
-        # self.model = SamAutomaticMaskGenerator(
-        #    model=sam,
-        #    points_per_side=points_per_side,
-        #    pred_iou_thresh=pred_iou_thresh,
-        #    stability_score_thresh=stability_score_thresh,
-        #    crop_n_layers=crop_n_layers,
-        #    crop_n_points_downscale_factor=crop_n_layers,
-        #    min_mask_region_area=min_mask_region_area,
-        # )
-        pass
+        sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
+        self.model = SamAutomaticMaskGenerator(
+            model=sam,
+            points_per_side=points_per_side,
+            pred_iou_thresh=pred_iou_thresh,
+            stability_score_thresh=stability_score_thresh,
+            crop_n_layers=crop_n_layers,
+            crop_n_points_downscale_factor=crop_n_layers,
+            min_mask_region_area=min_mask_region_area,
+        )
 
     def process(self, img: np.ndarray) -> dict:
         image_gray = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
