@@ -35,5 +35,3 @@ jobs:
     - name: Run type checking with mypy
       run: |
         mypy .
-
-
