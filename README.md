@@ -1,3 +1,5 @@
+[![Python CI](https://github.com/rostekus/image-segmentation-subscriber/actions/workflows/python_ci.yaml/badge.svg?branch=main)](https://github.com/rostekus/image-segmentation-subscriber/actions/workflows/python_ci.yaml)
+
 # RabbitMQ Subscriber for Picture Segmentation
 
 This is a Python project that subscribes to a RabbitMQ queue and waits for messages containing picture IDs. The picture is downloaded from a MongoDB database and then segmented. The segmented picture is saved back to the MongoDB database.
