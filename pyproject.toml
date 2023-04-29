@@ -40,5 +40,3 @@ py_version = 310
 
 [tool.mypy]
 ignore_missing_imports = true
-
-

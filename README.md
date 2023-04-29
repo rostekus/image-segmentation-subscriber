@@ -4,7 +4,7 @@ This is a Python project that subscribes to a RabbitMQ queue and waits for messa
 
 ## Installation
 
-This project can be run using either Poetry or Docker. 
+This project can be run using either Poetry or Docker.
 
 ### Using Poetry
 
