@@ -2,8 +2,7 @@ import logging
 import os
 
 import pika
-from src.queue.handler.handler_protocol import IHandler
-
+from src.queue.queue_protocols import IHandler
 
 
 class RabbitMQSubscriber:
@@ -12,10 +11,10 @@ class RabbitMQSubscriber:
         self.message_handler = message_handler
         self.connection = None
         self.channel = None
-        host = os.environ.get("RABBITMQ_HOST", "172.20.0.3")
+        host = os.environ.get("RABBITMQ_HOST", "localhost")
         port = int(os.environ.get("RABBITMQ_PORT", 5672))
-        username = os.environ.get("RABBITMQ_USERNAME")
-        password = os.environ.get("RABBITMQ_PASSWORD")
+        username = os.environ["RABBITMQ_USERNAME"]
+        password = os.environ["RABBITMQ_PASSWORD"]
         self._connect(host, port, username, password)
 
     def _connect(
@@ -26,8 +25,7 @@ class RabbitMQSubscriber:
         password: str = "guest",
     ) -> None:
         credentials = pika.PlainCredentials(username, password)
-        parameters = pika.ConnectionParameters(
-            host=host, port=port, credentials=credentials)
+        parameters = pika.ConnectionParameters(host=host, port=port, credentials=credentials)
         self.connection = pika.BlockingConnection(parameters)
 
         if self.connection is None:
@@ -39,7 +37,7 @@ class RabbitMQSubscriber:
     def _callback_wrapper(
         self, ch: pika.channel.Channel, method: pika.spec.Basic.Deliver, properties: pika.spec.BasicProperties, body: bytes
     ) -> None:
-        logging.info(f"Received message {body}")
+        logging.info(f"Received message {body!r}")
         self.message_handler.register(body)
 
     def start_consuming(self) -> None:
