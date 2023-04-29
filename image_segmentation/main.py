@@ -5,9 +5,6 @@ import traceback
 import pika
 from config import config
 from src.db.mongo.mongo_db_connector import MongoDBConnector
-from src.image_segmentation.image_segmentation_model.sam_model.model import (
-    SAMImageSegmentationModel,
-)
 from src.image_segmentation.image_segmentation_model.segmentatin_model_factory import (
     SegmentationModelFactory,
 )

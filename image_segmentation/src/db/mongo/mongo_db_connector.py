@@ -1,7 +1,6 @@
 import logging
 import os
 
-from bson import objectid
 from gridfs import GridFS
 from pymongo import MongoClient
 

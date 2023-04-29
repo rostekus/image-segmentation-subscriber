@@ -1,8 +1,7 @@
-import logging
 import os
 
 import pika
-from src.queue.queue_protocols import AbstractHandler, IHandler
+from src.queue.queue_protocols import AbstractHandler
 
 
 class RabbitMQPublisher(AbstractHandler):
