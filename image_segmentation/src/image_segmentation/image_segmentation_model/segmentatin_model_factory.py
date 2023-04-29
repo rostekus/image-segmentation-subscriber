@@ -8,8 +8,8 @@ from src.image_segmentation.image_segmentation_model.sam_model.model import (
 
 class SegmentationModelFactory:
     @staticmethod
-    def get_model(model_name: str) -> AbstractModel:
+    def get_model(model_name: str, **kwargs) -> AbstractModel:
         if model_name == "sam":
-            return SAMImageSegmentationModel(model_type="vit_h")
+            return SAMImageSegmentationModel(**kwargs)
         else:
             raise NotImplementedError
