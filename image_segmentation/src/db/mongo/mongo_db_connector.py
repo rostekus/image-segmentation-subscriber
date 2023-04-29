@@ -6,6 +6,21 @@ from pymongo import MongoClient
 
 
 class MongoDBConnector:
+    """The MongoDBConnector class provides a connection to a MongoDB database
+        and allows the user to download or upload files to the GridFS file system in the database.
+        The connection parameters are read from environment variables.
+
+    Methods:
+
+    enter: establishes a connection to the database and returns the instance of the class
+    exit: closes the connection to the database
+    download_file: downloads a file from the GridFS file system by the given filename
+    upload_file: uploads a file to the GridFS file system with the given filename and bytes
+    Raises:
+
+    Exception: when the MongoDBConnector is not initialized.
+    """
+
     def __init__(self):
         self.host = os.environ.get("MONGO_HOST")
         self.port = os.environ.get("MONGO_PORT")
