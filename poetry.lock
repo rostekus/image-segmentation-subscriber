@@ -1879,6 +1879,22 @@ cryptography = ">=2.0"
 jeepney = ">=0.6"
 
 [[package]]
+name = "segment-anything"
+version = "1.0"
+description = ""
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "segment_anything-1.0-py3-none-any.whl", hash = "sha256:86f67d417a915823c3302098effe9008b688945772517310956bb49de0e7f02e"},
+    {file = "segment_anything-1.0.tar.gz", hash = "sha256:ed0c9f6fb07bbef9c6238a7028a13c8272f1ba6b6305ca73e3e064266503736b"},
+]
+
+[package.extras]
+all = ["matplotlib", "onnx", "onnxruntime", "opencv-python", "pycocotools"]
+dev = ["black", "flake8", "isort", "mypy"]
+
+[[package]]
 name = "setuptools"
 version = "67.6.1"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
@@ -2284,4 +2300,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "be01a43ccfc6c8cfe44861e617097b78da978f99a17f732272bc6cf593cc7d6c"
+content-hash = "1c63e3072187d537104a08d33673fa8594d470eb37e8bb04cfec95872ff5e54f"
