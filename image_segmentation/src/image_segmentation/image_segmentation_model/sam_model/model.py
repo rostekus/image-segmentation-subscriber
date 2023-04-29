@@ -6,8 +6,8 @@ from segment_anything import SamAutomaticMaskGenerator, sam_model_registry
 class SAMImageSegmentationModel:
     def __init__(
         self,
-        model_type,
-        sam_checkpoint="sam_vit_h_4b8939.pth",
+        model_type="vit_h",
+        sam_checkpoint="sam_vit_h.pth",
         points_per_side=32,
         pred_iou_thresh=0.9,
         stability_score_thresh=0.96,

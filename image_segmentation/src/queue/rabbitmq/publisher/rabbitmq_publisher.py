@@ -1,14 +1,12 @@
-import logging
 import os
 
 import pika
-from src.queue.queue_protocols import IHandler
+from src.queue.queue_protocols import AbstractHandler
 
 
-class RabbitMQSubscriber:
-    def __init__(self, queue_name: str, message_handler: IHandler):
+class RabbitMQPublisher(AbstractHandler):
+    def __init__(self, queue_name: str):
         self.queue_name = queue_name
-        self.message_handler = message_handler
         self.connection = None
         self.channel = None
         host = os.environ.get("RABBITMQ_HOST", "localhost")
@@ -34,22 +32,15 @@ class RabbitMQSubscriber:
         self.channel = self.connection.channel()
         self.channel.queue_declare(queue=self.queue_name)
 
-    def _callback_wrapper(
-        self, ch: pika.channel.Channel, method: pika.spec.Basic.Deliver, properties: pika.spec.BasicProperties, body: bytes
-    ) -> None:
-        logging.info(f"Received message {body!r}")
-        self.message_handler.register(body)
+    def register(self, message: bytes) -> None:
+        return self.publish_message(message)
 
-    def start_consuming(self) -> None:
+    def publish_message(self, message: bytes) -> None:
         if self.channel is None:
-            raise RuntimeError("Subscriber is not connected")
-        self.channel.basic_consume(
-            queue=self.queue_name,
-            on_message_callback=self._callback_wrapper,
-            auto_ack=True,
+            raise RuntimeError("Publisher is not connected")
+        self.channel.basic_publish(
+            exchange="",
+            routing_key=self.queue_name,
+            body=message,
+            properties=pika.BasicProperties(delivery_mode=2),
         )
-        while True:
-            try:
-                self.channel.start_consuming()
-            except Exception as e:
-                logging.error(e)
