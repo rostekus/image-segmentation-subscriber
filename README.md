@@ -2,6 +2,12 @@
 
 This is a Python project that subscribes to a RabbitMQ queue and waits for messages containing picture IDs. The picture is downloaded from a MongoDB database and then segmented. The segmented picture is saved back to the MongoDB database.
 
+## UML Diagram
+Below is the UML diagram for the project:
+![mermaid-diagram-2023-04-29-225442](https://user-images.githubusercontent.com/34031791/235321771-9b5f10cb-ece0-40fa-bf78-fc783ff585df.svg)
+
+
+
 ## Installation
 
 This project can be run using either Poetry or Docker.
